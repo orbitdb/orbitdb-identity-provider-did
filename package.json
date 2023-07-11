@@ -1,21 +1,36 @@
 {
-  "name": "repo-template",
-  "private": true,
-  "version": "1.0.0",
-  "description": "A template for creating new repositories in the @orbitdb organization",
-  "main": "index.js",
+  "name": "orbit-db-identity-provider-did",
+  "version": "1.0.0-dev",
+  "description": "An identity provider for creating and signing OrbitDB identities using a Decentralized IDentifier (DID). See https://www.w3.org/TR/did-core/.",
+  "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "standard --env=mocha",
+    "lint:fix": "standard --fix"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RichardLitt/repo-template.git"
+    "url": "git+https://github.com/orbitdb/orbit-db-identity-provider-did.git"
   },
-  "keywords": ["orbitdb", "orbit", "template", "docs"],
-  "author": "Richard Littauer <richard.littauer@gmail.com> (https://burntfen.com)",
+  "keywords": [
+    "orbitdb",
+    "orbit",
+    "did",
+    "decentralized identifier",
+    "identifier",
+    "decentralized"
+  ],
+  "author": "OrbitDB",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RichardLitt/repo-template/issues"
+    "url": "https://github.com/orbitdb/orbit-db-identity-provider-did/issues"
   },
-  "homepage": "https://github.com/RichardLitt/repo-template#readme"
+  "homepage": "https://github.com/orbitdb/orbit-db-identity-provider-did#readme",
+  "devDependencies": {
+    "standard": "^17.1.0"
+  },
+  "dependencies": {
+    "dids": "^4.0.3",
+    "uint8arrays": "^4.0.4"
+  }
 }
