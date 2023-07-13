@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "lint": "standard --env=mocha",
-    "lint:fix": "standard --fix"
+    "lint:fix": "standard --fix",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -27,10 +28,21 @@
   },
   "homepage": "https://github.com/orbitdb/orbit-db-identity-provider-did#readme",
   "devDependencies": {
+    "key-did-provider-ed25519": "^3.0.1",
+    "key-did-resolver": "^3.0.0",
+    "mocha": "^10.2.0",
     "standard": "^17.1.0"
   },
   "dependencies": {
     "dids": "^4.0.3",
     "uint8arrays": "^4.0.4"
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ],
+    "ignore": [
+      "keystore"
+    ]
   }
 }
