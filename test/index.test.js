@@ -53,23 +53,17 @@ describe('DID Identity Provider', function () {
       assert.strictEqual(identity.publicKey, keystore.getPublic(signingKey))
     })
 
-    /*
     it('has a signature for the id', async () => {
-      const signingKey = await keystore.getKey(didStr)
-      const idSignature = await keystore.sign(signingKey, didStr)
-      const verifies = await Keystore.verify(idSignature, identity.publicKey, didStr)
+      const idSignature = await identities.sign(identity, didStr)
+      const verifies = await identities.verify(idSignature, identity.publicKey, didStr)
       assert.strictEqual(verifies, true)
       assert.strictEqual(identity.signatures.id, idSignature)
     })
-    */
 
-    /*
     it('has a signature for the publicKey', async () => {
-      const signingKey = await keystore.getKey(didStr)
-      const idSignature = await keystore.sign(signingKey, didStr)
+      const idSignature = await identities.sign(identity, didStr)
       assert.notStrictEqual(idSignature, undefined)
     })
-    */
   })
 
   describe('verify identity', () => {
@@ -85,37 +79,31 @@ describe('DID Identity Provider', function () {
       assert.strictEqual(verified, true)
     })
 
-    /*
     it('DID identity with incorrect id does not verify', async () => {
-      const identity2 = new Identity('NotAnId', identity.publicKey, identity.signatures.id, identity.signatures.publicKey, identity.type, identity.provider)
+      const identity2 = { id: 'NotAnId', publicKey: identity.publicKey, signatures: identity.signatures, type: identity.type, sign: identities.sign, verify: identities.verify }
       const verified = await identities.verifyIdentity(identity2)
       assert.strictEqual(verified, false)
     })
-    */
   })
 
   describe('sign data with an identity', () => {
-    // let identity
-    // const data = 'hello friend'
+    let identity
+    const data = 'hello friend'
 
     before(async () => {
-      // const didProvider = new Ed25519Provider(seed)
-      // identity = await identities.createIdentity({ type, keystore, didProvider })
+      const didProvider = new Ed25519Provider(seed)
+      identity = await identities.createIdentity({ type, keystore, didProvider })
     })
 
-    /*
     it('sign data', async () => {
-      const signingKey = await keystore.getKey(identity.id)
-      const expectedSignature = await keystore.sign(signingKey, data)
+      const expectedSignature = await identities.sign(identity, data)
       const signature = await identity.sign(identity, data, keystore)
       assert.strictEqual(signature, expectedSignature)
     })
-    */
 
-    /*
     it('throws an error if private key is not found from keystore', async () => {
       // Remove the key from the keystore (we're using a mock storage in these tests)
-      const modifiedIdentity = new Identity('this id does not exist', identity.publicKey, '<sig>', identity.signatures, identity.type, identity.provider)
+      const modifiedIdentity = { id: 'this id does not exist', publicKey: identity.publicKey, signature: identity.signatures, type: identity.type, sign: identities.sign, verify: identities.verify }
       let signature
       let err
       try {
@@ -124,9 +112,8 @@ describe('DID Identity Provider', function () {
         err = e.toString()
       }
       assert.strictEqual(signature, undefined)
-      assert.strictEqual(err, 'Error: Private signing key not found from Keystore')
+      assert.strictEqual(err, 'Error: Private signing key not found from KeyStore')
     })
-    */
 
     describe('verify data signed by an identity', () => {
       const data = 'hello friend'
