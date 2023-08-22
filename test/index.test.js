@@ -3,7 +3,7 @@ import path from 'path'
 import rmrf from 'rimraf'
 import { Ed25519Provider } from 'key-did-provider-ed25519'
 import KeyDidResolver from 'key-did-resolver'
-import { KeyStore, Identities, addIdentityProvider } from 'orbitdb'
+import { KeyStore, Identities, addIdentityProvider } from '@orbitdb/core'
 import * as DIDIdentityProvider from '../src/index.js'
 
 const keypath = path.resolve('./test/keys')
