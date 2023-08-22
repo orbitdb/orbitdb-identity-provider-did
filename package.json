@@ -1,6 +1,6 @@
 {
   "name": "@orbitdb/identity-provider-did",
-  "version": "1.0.0-dev",
+  "version": "0.30.1",
   "description": "An identity provider for creating and signing OrbitDB identities using a Decentralized IDentifier (DID). See https://www.w3.org/TR/did-core/.",
   "main": "src/index.js",
   "type": "module",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/orbitdb/orbit-db-identity-provider-did.git"
+    "url": "git+https://github.com/orbitdb/orbitdb-identity-provider-did.git"
   },
   "keywords": [
     "orbitdb",
@@ -24,9 +24,9 @@
   "author": "OrbitDB",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/orbitdb/orbit-db-identity-provider-did/issues"
+    "url": "https://github.com/orbitdb/orbitdb-identity-provider-did/issues"
   },
-  "homepage": "https://github.com/orbitdb/orbit-db-identity-provider-did#readme",
+  "homepage": "https://github.com/orbitdb/orbitdb-identity-provider-did#readme",
   "devDependencies": {
     "key-did-provider-ed25519": "^3.0.1",
     "key-did-resolver": "^3.0.0",
