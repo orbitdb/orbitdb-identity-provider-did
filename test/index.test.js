@@ -3,8 +3,8 @@ import path from 'path'
 import rmrf from 'rimraf'
 import { Ed25519Provider } from 'key-did-provider-ed25519'
 import KeyDidResolver from 'key-did-resolver'
-import { KeyStore, Identities, addIdentityProvider } from '@orbitdb/core'
-import * as DIDIdentityProvider from '../src/index.js'
+import { KeyStore, Identities, useIdentityProvider } from '@orbitdb/core'
+import DIDIdentityProvider from '../src/index.js'
 
 const keypath = path.resolve('./test/keys')
 
@@ -13,16 +13,19 @@ let keystore
 const seed = new Uint8Array([157, 94, 116, 198, 19, 248, 93, 239, 173, 82, 245, 222, 199, 7, 183, 177, 123, 238, 83, 240, 143, 188, 87, 191, 33, 95, 58, 136, 46, 218, 219, 245])
 const didStr = 'did:key:z6MkpnTJwrrVuphNh1uKb5DB7eRxvqniVaSDUHU6jtGVmn3r'
 
-const type = DIDIdentityProvider.type
 let identities
+let provider
 
 describe('DID Identity Provider', function () {
   before(async () => {
     rmrf.sync(keypath)
     DIDIdentityProvider.setDIDResolver(KeyDidResolver.getResolver())
-    addIdentityProvider(DIDIdentityProvider)
+    useIdentityProvider(DIDIdentityProvider)
     keystore = await KeyStore({ path: keypath })
     identities = await Identities({ keystore })
+
+    const didProvider = new Ed25519Provider(seed)
+    provider = DIDIdentityProvider({ didProvider })
   })
 
   after(async () => {
@@ -34,8 +37,7 @@ describe('DID Identity Provider', function () {
     let identity
 
     before(async () => {
-      const didProvider = new Ed25519Provider(seed)
-      identity = await identities.createIdentity({ type, keystore, didProvider })
+      identity = await identities.createIdentity({ provider, keystore })
     })
 
     it('has the correct id', async () => {
@@ -70,8 +72,7 @@ describe('DID Identity Provider', function () {
     let identity
 
     before(async () => {
-      const didProvider = new Ed25519Provider(seed)
-      identity = await identities.createIdentity({ type, keystore, didProvider })
+      identity = await identities.createIdentity({ provider, keystore })
     })
 
     it('DID identity verifies', async () => {
@@ -91,8 +92,7 @@ describe('DID Identity Provider', function () {
     const data = 'hello friend'
 
     before(async () => {
-      const didProvider = new Ed25519Provider(seed)
-      identity = await identities.createIdentity({ type, keystore, didProvider })
+      identity = await identities.createIdentity({ provider, keystore })
     })
 
     it('sign data', async () => {
@@ -121,8 +121,7 @@ describe('DID Identity Provider', function () {
       let signature
 
       before(async () => {
-        const didProvider = new Ed25519Provider(seed)
-        identity = await identities.createIdentity({ type, keystore, didProvider })
+        identity = await identities.createIdentity({ provider, keystore })
         signature = await identity.sign(identity, data, keystore)
       })
 
