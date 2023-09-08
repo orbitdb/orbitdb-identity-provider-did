@@ -34,7 +34,7 @@
     "standard": "^17.1.0"
   },
   "dependencies": {
-    "@orbitdb/core": "^0.30.2-249e999.0",
+    "@orbitdb/core": "^0.31.1-9beddc8.0",
     "dids": "^4.0.3",
     "uint8arrays": "^4.0.4"
   },
