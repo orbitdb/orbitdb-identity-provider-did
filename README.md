@@ -23,21 +23,21 @@ npm i @orbitdb/identity-provider-did
 
 ## Usage
 
-Use [addIdentityProvider](https://api.orbitdb.org/module-Identities.html#.addIdentityProvider) to make the DID identity provider available to OrbitDB, then pass the `type` param to [createIdentity](https://api.orbitdb.org/module-Identities-Identities.html#createIdentity) with the identity provider name "did":
+Use [addIdentityProvider](https://api.orbitdb.org/module-Identities.html#.addIdentityProvider) to make the DID identity provider available to OrbitDB, then pass the `provider` param to [createIdentity](https://api.orbitdb.org/module-Identities-Identities.html#createIdentity) with the DID identity provider function:
 
 ```js
-// Fill out with actual use case
-import * as OrbitDBIdentityProviderDID from '@orbitdb/identity-provider-did'
+import OrbitDBIdentityProviderDID from '@orbitdb/identity-provider-did'
 import { create } from 'ipfs-core'
-import { Identities, addIdentityProvider } from '@orbitdb/core'
+import { Identities, useIdentityProvider } from '@orbitdb/core'
 
 const ipfs = await create()
 
-addIdentityProvider(OrbitDBIdentityProviderDID)
+useIdentityProvider(OrbitDBIdentityProviderDID)
+
+const didProvider = new Ed25519Provider(seed)
 
 const identities = await Identities({ ipfs })
-
-const identity = await identities.createIdentity({ id: 'userA', type: 'ethereum' }) // you can now use this with your OrbitDB databases.
+const identity = await identities.createIdentity({ provider: OrbitDBIdentityProviderDID({ didProvider }) }) // you can now use this with your OrbitDB databases.
 ```
 
 ## Contributing

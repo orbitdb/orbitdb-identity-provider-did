@@ -13,7 +13,7 @@ const setDIDResolver = resolver => {
   }
 }
 
-const verifyIdentity = identity => {
+const verifyIdentity = async identity => {
   if (!didResolver) {
     throw new Error('The DID resolver must first be set with setDIDResolver()')
   }
@@ -39,7 +39,7 @@ const verifyIdentity = identity => {
   return true
 }
 
-const OrbitDBIdentityProviderDID = ({ didProvider }) => {
+const OrbitDBIdentityProviderDID = ({ didProvider }) => async () => {
   if (!didResolver) {
     throw new Error('The DID resolver must first be set with setDIDResolver()')
   }
@@ -71,9 +71,14 @@ const OrbitDBIdentityProviderDID = ({ didProvider }) => {
   }
 
   return {
+    type,
     getId,
     signIdentity
   }
 }
 
-export { OrbitDBIdentityProviderDID as default, verifyIdentity, type, setDIDResolver }
+OrbitDBIdentityProviderDID.type = type
+OrbitDBIdentityProviderDID.verifyIdentity = verifyIdentity
+OrbitDBIdentityProviderDID.setDIDResolver = setDIDResolver
+
+export default OrbitDBIdentityProviderDID
