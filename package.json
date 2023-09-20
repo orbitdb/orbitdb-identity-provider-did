@@ -1,6 +1,6 @@
 {
   "name": "@orbitdb/identity-provider-did",
-  "version": "0.31.0",
+  "version": "1.0.0",
   "description": "An identity provider for creating and signing OrbitDB identities using a Decentralized IDentifier (DID). See https://www.w3.org/TR/did-core/.",
   "main": "src/index.js",
   "type": "module",

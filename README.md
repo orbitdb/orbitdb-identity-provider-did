@@ -8,11 +8,6 @@
 
 Create and sign OrbitDB identities using a Decentralized IDentifier (DID). See https://www.w3.org/TR/did-core/.
 
-#### Project status & support
-
-* Status: **in active development**
-* Compatible with **orbitdb versions >= 1.0.0**
-
 ## Install
 
 This project uses [npm](http://npmjs.com/) and [nodejs](https://nodejs.org/).
