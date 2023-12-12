@@ -1,6 +1,6 @@
 import assert from 'assert'
 import path from 'path'
-import rmrf from 'rimraf'
+import { rimraf } from 'rimraf'
 import { Ed25519Provider } from 'key-did-provider-ed25519'
 import KeyDidResolver from 'key-did-resolver'
 import { KeyStore, Identities, useIdentityProvider } from '@orbitdb/core'
@@ -18,7 +18,7 @@ let provider
 
 describe('DID Identity Provider', function () {
   before(async () => {
-    rmrf.sync(keypath)
+    await rimraf(keypath)
     DIDIdentityProvider.setDIDResolver(KeyDidResolver.getResolver())
     useIdentityProvider(DIDIdentityProvider)
     keystore = await KeyStore({ path: keypath })
@@ -30,7 +30,7 @@ describe('DID Identity Provider', function () {
 
   after(async () => {
     await keystore.close()
-    rmrf.sync(keypath)
+    await rimraf(keypath)
   })
 
   describe('create an DID identity', () => {
