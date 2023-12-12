@@ -9,6 +9,9 @@
     "lint:fix": "standard --fix",
     "test": "mocha"
   },
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/orbitdb/orbitdb-identity-provider-did.git"
@@ -28,9 +31,11 @@
   },
   "homepage": "https://github.com/orbitdb/orbitdb-identity-provider-did#readme",
   "devDependencies": {
+    "ipfs-core": "^0.18.1",
     "key-did-provider-ed25519": "^3.0.1",
     "key-did-resolver": "^3.0.0",
     "mocha": "^10.2.0",
+    "rimraf": "^5.0.5",
     "standard": "^17.1.0"
   },
   "dependencies": {
