@@ -4,7 +4,7 @@
   <img src="https://github.com/orbitdb/orbitdb/blob/main/images/orbit_db_logo_color.png" width="256" />
 </p>
 
-[![Matrix](https://img.shields.io/matrix/orbit-db:matrix.org?label=chat%20on%20matrix)](https://app.element.io/#/room/#orbit-db:matrix.org) [![npm (scoped)](https://img.shields.io/npm/v/%40orbitdb/identity-provider-did)](https://www.npmjs.com/package/orbit-db-identity-provider-did) [![node-current (scoped)](https://img.shields.io/node/v/%40orbitdb/identity-provider-did)](https://www.npmjs.com/package/@orbitdb/identity-provider-did)
+[![Matrix](https://img.shields.io/matrix/orbit-db:matrix.org?label=chat%20on%20matrix)](https://app.element.io/#/room/#orbit-db:matrix.org) [![npm (scoped)](https://img.shields.io/npm/v/%40orbitdb/identity-provider-did)](https://www.npmjs.com/package/%40orbitdb/identity-provider-did) [![node-current (scoped)](https://img.shields.io/node/v/%40orbitdb/identity-provider-did)](https://www.npmjs.com/package/%40orbitdb/identity-provider-did)
 
 Create and sign OrbitDB identities using a Decentralized IDentifier (DID). See https://www.w3.org/TR/did-core/.
 
