@@ -31,7 +31,8 @@
   },
   "homepage": "https://github.com/orbitdb/orbitdb-identity-provider-did#readme",
   "devDependencies": {
-    "@orbitdb/core": "^1.0.2",
+    "@orbitdb/core": "^2.0.1",
+    "helia": "^4.0.0",
     "ipfs-core": "^0.18.1",
     "key-did-provider-ed25519": "^3.0.1",
     "key-did-resolver": "^3.0.0",

@@ -1,10 +1,10 @@
 import assert from 'assert'
 import { rimraf } from 'rimraf'
+import { createHelia, libp2pDefaults } from 'helia'
 import { createOrbitDB, Identities, useIdentityProvider } from '@orbitdb/core'
 import OrbitDBIdentityProviderDID from '../src/index.js'
 import KeyDidResolver from 'key-did-resolver'
 import { Ed25519Provider } from 'key-did-provider-ed25519'
-import * as IPFS from 'ipfs-core'
 
 describe('Use DID Identity Provider with OrbitDB', function () {
   this.timeout(10000)
@@ -17,7 +17,8 @@ describe('Use DID Identity Provider with OrbitDB', function () {
   let provider
 
   beforeEach(async () => {
-    ipfs = await IPFS.create({})
+    const libp2pOptions = libp2pDefaults()
+    ipfs = await createHelia({ libp2p: libp2pOptions })
 
     const seed = new Uint8Array([157, 94, 116, 198, 19, 248, 93, 239, 173, 82, 245, 222, 199, 7, 183, 177, 123, 238, 83, 240, 143, 188, 87, 191, 33, 95, 58, 136, 46, 218, 219, 245])
 
