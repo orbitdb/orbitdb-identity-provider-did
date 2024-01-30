@@ -23,13 +23,14 @@ Start by registering the OrbitDBIdentityProviderDID identity provider with [useI
 Once registered, you can simply pass in the identity provider when creating an OrbitDB instance:
 
 ```js
+import { createHelia, libp2pDefaults } from 'helia'
 import { createOrbitDB, useIdentityProvider } from '@orbitdb/core'
 import * as OrbitDBIdentityProviderDID from '@orbitdb/identity-provider-did'
 import KeyDidResolver from 'key-did-resolver'
 import { Ed25519Provider } from 'key-did-provider-ed25519'
-import { create } from 'ipfs-core'
 
-const ipfs = await create()
+const libp2pOptions = libp2pDefaults()
+const ipfs = await createHelia({ libp2p: libp2pOptions })
 
 const seed = new Uint8Array(/* some private seed */)
 
@@ -43,13 +44,14 @@ await createOrbitDB({ ipfs, identity: { provider } })
 If you require a more custom approach to managing identities, you can create an identity by passing the identity provider to [createIdentity](https://api.orbitdb.org/module-Identities-Identities.html#createIdentity) then use the resulting identity with OrbitDB:
 
 ```js
+import { createHelia, libp2pDefaults } from 'helia'
 import { createOrbitDB, Identities, useIdentityProvider } from '@orbitdb/core'
 import OrbitDBIdentityProviderDID from '@orbitdb/identity-provider-did'
 import KeyDidResolver from 'key-did-resolver'
 import { Ed25519Provider } from 'key-did-provider-ed25519'
-import { create } from 'ipfs-core'
 
-const ipfs = await create()
+const libp2pOptions = libp2pDefaults()
+const ipfs = await createHelia({ libp2p: libp2pOptions })
 
 const seed = new Uint8Array(/* some private seed */)
 
