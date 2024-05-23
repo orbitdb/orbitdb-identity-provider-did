@@ -18,7 +18,7 @@ const verifyIdentity = async identity => {
     throw new Error('The DID resolver must first be set with setDIDResolver()')
   }
 
-  const { publicKey, signatures } = identity
+  const { id: idFromIdentity, publicKey, signatures } = identity
   const data = publicKey + signatures.id
 
   try {
@@ -26,8 +26,14 @@ const verifyIdentity = async identity => {
     const [header, signature] = signatures.publicKey.split('..')
     const jws = [header, payload, signature].join('.')
     didResolver.verifyJWS(jws)
-      .then(() => {
-        // do nothing
+      .then(({ didResolutionResult }) => {
+        const { id: idFromSignature } = didResolutionResult.didDocument
+
+        // The ID from identity is used to give access permission
+        // so we should be sure that its integrity is validated
+        if (idFromIdentity !== idFromSignature) {
+          throw new Error('ID from the JWS header does not match the ID from identity')
+        }
       })
       .catch((error) => {
         throw error
