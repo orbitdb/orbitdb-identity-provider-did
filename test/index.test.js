@@ -107,10 +107,10 @@ describe('DID Identity Provider', function () {
       }), keystore })
 
       // The ID of the fake identity is equal to the ID of an admin
-      // account, however all the signatures and the hash is different,
-      // meaning that in the entries produced by the fake identity the "identity"
+      // account, but all the signatures and the hash are different.
+      // This means that the entries produced by the fake identity's "identity"
       // field will point to a fake identity document in IPFS and the victim
-      // will get that faked identity object
+      // will get a fake identity object.
       assert.strictEqual(fakeIdentity.id, identity.id)
       assert.notStrictEqual(fakeIdentity.hash, identity.hash)
       assert.notDeepStrictEqual(fakeIdentity.signatures, identity.signatures)
