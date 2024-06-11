@@ -99,7 +99,7 @@ describe('DID Identity Provider', function () {
       const fakeIdentities = await Identities({ keystore: fakeKeystore })
 
       // Create an identity with all new keys, but with an ID from the 
-      // "admin" identity we wanna use to get write access by utilizing
+      // "admin" identity we want to use to get write access by utilizing
       // a modified version of the provider
       const fakeIdentity =  await fakeIdentities.createIdentity({ provider: () => ({
         ...fakeProvider,
