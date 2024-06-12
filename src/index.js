@@ -25,7 +25,7 @@ const verifyIdentity = async identity => {
     const payload = u8a.toString(u8a.fromString(data, 'base16'), 'base64url')
     const [header, signature] = signatures.publicKey.split('..')
     const jws = [header, payload, signature].join('.')
-    
+
     await didResolver.verifyJWS(jws)
       .then(({ didResolutionResult }) => {
         const { id: idFromSignature } = didResolutionResult.didDocument
