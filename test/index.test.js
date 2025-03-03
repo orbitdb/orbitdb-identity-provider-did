@@ -81,8 +81,46 @@ describe('DID Identity Provider', function () {
     })
 
     it('DID identity with incorrect id does not verify', async () => {
-      const identity2 = { id: 'NotAnId', publicKey: identity.publicKey, signatures: identity.signatures, type: identity.type, sign: identities.sign, verify: identities.verify }
+      const identity2 = {
+        ...identity,
+        id: 'NotAnId'
+      }
       const verified = await identities.verifyIdentity(identity2)
+      assert.strictEqual(verified, false)
+    })
+
+    it('Valid DID identity with fake publicKey does not verify', async () => {
+      // HACKER part:
+      // Create a completely new set of private keys
+      const fakeSeed = new Uint8Array([100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 183, 177, 123, 238, 83, 240, 143, 188, 87, 191, 33, 95, 58, 136, 46, 218, 219, 245])
+      const fakeDidProvider = new Ed25519Provider(fakeSeed)
+      const fakeProvider = await DIDIdentityProvider({ didProvider: fakeDidProvider })()
+      const fakeKeystore = await KeyStore({ path: path.join(keypath, 'fake') })
+      const fakeIdentities = await Identities({ keystore: fakeKeystore })
+
+      // Create an identity with all new keys, but with an ID from the
+      // "admin" identity we want to use to get write access by utilizing
+      // a modified version of the provider
+      const fakeIdentity = await fakeIdentities.createIdentity({
+        provider: () => ({
+          ...fakeProvider,
+          getId: () => identity.id
+        }),
+        keystore
+      })
+
+      // The ID of the fake identity is equal to the ID of an admin
+      // account, but all the signatures and the hash are different.
+      // This means that the entries produced by the fake identity's "identity"
+      // field will point to a fake identity document in IPFS and the victim
+      // will get a fake identity object.
+      assert.strictEqual(fakeIdentity.id, identity.id)
+      assert.notStrictEqual(fakeIdentity.hash, identity.hash)
+      assert.notDeepStrictEqual(fakeIdentity.signatures, identity.signatures)
+
+      // VICTIM part:
+      // Using a normal didProvider try to validate the faked identity
+      const verified = await identities.verifyIdentity(fakeIdentity)
       assert.strictEqual(verified, false)
     })
   })
