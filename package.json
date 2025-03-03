@@ -10,7 +10,7 @@
     "test": "mocha"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=20.0.0"
   },
   "repository": {
     "type": "git",
@@ -31,8 +31,8 @@
   },
   "homepage": "https://github.com/orbitdb/orbitdb-identity-provider-did#readme",
   "devDependencies": {
-    "@orbitdb/core": "^2.0.1",
-    "helia": "^4.0.0",
+    "@orbitdb/core": "^2.4.3",
+    "helia": "^5.1.0",
     "key-did-provider-ed25519": "^3.0.1",
     "key-did-resolver": "^3.0.0",
     "mocha": "^10.2.0",
